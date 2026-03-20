@@ -1,0 +1,5 @@
+python-deriv-api
+pandas
+numpy
+scipy
+matplotlib
