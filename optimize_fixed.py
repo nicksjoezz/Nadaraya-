@@ -4,6 +4,9 @@ from nwe import nadaraya_watson_non_repainting
 from backtest_fixed_tpsl import run_backtest_fixed_tpsl
 
 def optimize_fixed_tpsl():
+    if not os.path.exists("r_100_15m_large.csv"):
+        print("Run fetch_large_data.py first.")
+        return
     df = pd.read_csv("r_100_15m_large.csv")
     src = df['close'].values
 
@@ -34,4 +37,5 @@ def optimize_fixed_tpsl():
     print(f"\nOptimization Complete. Best: {best_params}")
 
 if __name__ == "__main__":
+    import os
     optimize_fixed_tpsl()

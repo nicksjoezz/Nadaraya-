@@ -84,3 +84,16 @@ def run_backtest_fixed_tpsl(df, upper_col, lower_col, tp_pct=0.03, sl_pct=0.01):
     max_dd = (cum_pnl.cummax() - cum_pnl).max() / cum_pnl.cummax().max() if not cum_pnl.empty else 0
 
     return win_rate, total_pnl, num_trades, max_dd
+
+if __name__ == "__main__":
+    from nwe import nadaraya_watson_non_repainting
+    import os
+    if os.path.exists("r_100_15m_large.csv"):
+        df = pd.read_csv("r_100_15m_large.csv")
+        out, upper, lower = nadaraya_watson_non_repainting(df['close'].values, 8.0, 1.8)
+        df['upper'] = upper
+        df['lower'] = lower
+        wr, pnl, n, dd = run_backtest_fixed_tpsl(df, 'upper', 'lower')
+        print(f"Fixed TP (3%) / SL (1%) Results: WR: {wr:.2f}%, PnL: {pnl:.2%}, Trades: {n}, Max DD: {dd:.2%}")
+    else:
+        print("Data file not found.")

@@ -37,4 +37,4 @@ if __name__ == "__main__":
         df = pd.read_csv("r_100_15m_large.csv")
         compare_results_fixed(df)
     else:
-        print("Data file not found.")
+        print("Data file not found. Run fetch_large_data.py first.")
